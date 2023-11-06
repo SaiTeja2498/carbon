@@ -17,10 +17,24 @@ export const ContactUs = () => {
     const [age, setAge] = useState('');
     const [email, setEmail] = useState('');
     const [query, setQuery] = useState('');
+    const [showBottomDiv, setShowBottomDiv] = useState(false);
 
     const handlelandingpage = () => {
         navigate('/');
     };
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 0) {
+                setShowBottomDiv(true);
+            } else {
+                setShowBottomDiv(false);
+            }
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
 
     const handleFNameChange = (e) => {
         const { name, value } = e.target;
@@ -225,7 +239,7 @@ export const ContactUs = () => {
                 <div className="image-container">
                     <img src="landingPageImage.png" alt="image" className="image" />
                 </div>
-                {/* <footer className="bottom_div"></footer> */}
+                {/* <div className="bottom_div"></div> */}
             </div>
             {/* {ErrorMessage && <div className="error-message">{ErrorMessage}</div>} */}
             {SuccessMessage && <div className="success-message">{SuccessMessage}</div>}
